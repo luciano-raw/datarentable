@@ -35,8 +35,8 @@ export default function Footer() {
                     <div className="space-y-4 col-span-2 md:col-span-1">
                         <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white">Contacto</h4>
                         <div className="flex flex-col gap-3 text-sm text-text-muted font-mono">
-                            <p>hola@datarentable.com</p>
-                            <p>Santiago, Chile</p>
+                            <p>datarentable@gmail.com</p>
+                            <p>Talca, Chile</p>
                         </div>
                     </div>
                 </div>

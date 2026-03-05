@@ -17,9 +17,10 @@ export default function Navbar() {
     }, []);
 
     const navLinks = [
-        { name: "Soluciones", href: "#soluciones" },
-        { name: "Servicios", href: "#servicios" },
-        { name: "Metodología", href: "#proceso" },
+        { name: "Soluciones", href: "/#soluciones" },
+        { name: "Servicios", href: "/#servicios" },
+        { name: "Casos", href: "/casos" },
+        { name: "Metodología", href: "/#proceso" },
     ];
 
     return (
