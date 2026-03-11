@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import Card from "@/components/ui/Card";
 import ContactForm from "@/components/sections/ContactForm";
+import TeamSection from "@/components/sections/Team";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -205,6 +206,9 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      {/* Team Block */}
+      <TeamSection />
 
       {/* FAQ Block */}
       <section id="faq" className="container-custom section-spacing">
