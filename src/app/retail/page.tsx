@@ -4,6 +4,30 @@ import { motion } from "framer-motion";
 import { ShoppingBag, BarChart, Zap, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Card from "@/components/ui/Card";
+import ChartCard from "@/components/ui/ChartCard";
+import {
+    LineChart, Line, BarChart as ReBarChart, Bar,
+    XAxis, YAxis, CartesianGrid, Tooltip,
+    ResponsiveContainer, Cell, PieChart, Pie
+} from 'recharts';
+
+const marginData = [
+    { name: 'Ene', ventas: 4000, margen: 2400 },
+    { name: 'Feb', ventas: 3000, margen: 1398 },
+    { name: 'Mar', ventas: 2000, margen: 9800 },
+    { name: 'Abr', ventas: 2780, margen: 3908 },
+    { name: 'May', ventas: 1890, margen: 4800 },
+    { name: 'Jun', ventas: 2390, margen: 3800 },
+];
+
+const categoryData = [
+    { name: 'Electrónica', value: 45 },
+    { name: 'Hogar', value: 25 },
+    { name: 'Moda', value: 20 },
+    { name: 'Otros', value: 10 },
+];
+
+const COLORS = ['#7C3AED', '#10B981', '#3B82F6', '#F59E0B'];
 
 export default function RetailPage() {
     return (
@@ -79,6 +103,57 @@ export default function RetailPage() {
                             description="Visualiza la rentabilidad real después de costos logísticos y devoluciones."
                             icon={<ShoppingBag />}
                         />
+                    </div>
+                </section>
+
+                <section className="mb-32">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                        <div className="max-w-xl">
+                            <h2 className="text-3xl font-bold text-white tracking-tight">Visualización Proactiva</h2>
+                            <p className="text-muted font-light mt-2">Ejemplos reales de cómo transformamos datos operativos en tableros de control.</p>
+                        </div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-primary/50">Demo Interactiva</div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <ChartCard title="Márgenes vs Ventas" subtitle="Análisis Mensual (USD)">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={marginData}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
+                                    <XAxis dataKey="name" stroke="#9CA3AF" fontSize={12} tickLine={false} axisLine={false} />
+                                    <YAxis stroke="#9CA3AF" fontSize={12} tickLine={false} axisLine={false} />
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: '#12121A', border: '1px solid #27272A', borderRadius: '12px' }}
+                                        itemStyle={{ color: '#F3F4F6' }}
+                                    />
+                                    <Line type="monotone" dataKey="ventas" stroke="#7C3AED" strokeWidth={3} dot={{ r: 4, fill: '#7C3AED' }} />
+                                    <Line type="monotone" dataKey="margen" stroke="#10B981" strokeWidth={3} dot={{ r: 4, fill: '#10B981' }} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </ChartCard>
+
+                        <ChartCard title="Distribución por Categoría" subtitle="Porcentaje de Inventario">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={categoryData}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={60}
+                                        outerRadius={80}
+                                        paddingAngle={5}
+                                        dataKey="value"
+                                    >
+                                        {categoryData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: '#12121A', border: '1px solid #27272A', borderRadius: '12px' }}
+                                    />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </ChartCard>
                     </div>
                 </section>
 

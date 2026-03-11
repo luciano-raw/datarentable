@@ -135,21 +135,27 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card
-            title="Retail & E-commerce"
-            description="Control de stock en tiempo real, análisis de ticket promedio y optimización de márgenes por producto."
-            onClick={() => { }}
-          />
-          <Card
-            title="Constructoras"
-            description="Auditoría de costos operativos, control de avance de obra financiero y gestión de presupuestos dinámicos."
-            onClick={() => { }}
-          />
-          <Card
-            title="Flotas & Logística"
-            description="Optimización de rutas, control de consumo de combustible y mantenimiento predictivo de activos."
-            onClick={() => { }}
-          />
+          <Link href="/retail" className="block">
+            <Card
+              title="Retail & E-commerce"
+              description="Control de stock en tiempo real, análisis de ticket promedio y optimización de márgenes por producto."
+              onClick={() => { }}
+            />
+          </Link>
+          <Link href="/constructoras" className="block">
+            <Card
+              title="Constructoras"
+              description="Auditoría de costos operativos, control de avance de obra financiero y gestión de presupuestos dinámicos."
+              onClick={() => { }}
+            />
+          </Link>
+          <Link href="/flotas" className="block">
+            <Card
+              title="Flotas & Logística"
+              description="Optimización de rutas, control de consumo de combustible y mantenimiento predictivo de activos."
+              onClick={() => { }}
+            />
+          </Link>
         </div>
       </section>
 

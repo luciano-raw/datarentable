@@ -4,6 +4,28 @@ import { motion } from "framer-motion";
 import { Hammer, BarChart, Shield, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Card from "@/components/ui/Card";
+import ChartCard from "@/components/ui/ChartCard";
+import {
+    LineChart, Line, BarChart as ReBarChart, Bar,
+    XAxis, YAxis, CartesianGrid, Tooltip,
+    ResponsiveContainer, AreaChart, Area
+} from 'recharts';
+
+const budgetData = [
+    { name: 'Sem 1', real: 4000, presupuesto: 2400 },
+    { name: 'Sem 2', real: 3000, presupuesto: 2800 },
+    { name: 'Sem 3', real: 2000, presupuesto: 3500 },
+    { name: 'Sem 4', real: 2780, presupuesto: 3908 },
+    { name: 'Sem 5', real: 5890, presupuesto: 4800 },
+    { name: 'Sem 6', real: 2390, presupuesto: 3800 },
+];
+
+const progressData = [
+    { name: 'Obra A', avance: 85 },
+    { name: 'Obra B', avance: 42 },
+    { name: 'Obra C', avance: 67 },
+    { name: 'Obra D', avance: 12 },
+];
 
 export default function ConstructionPage() {
     return (
@@ -79,6 +101,54 @@ export default function ConstructionPage() {
                             description="Control de mermas y optimización de compras por volumen centralizadas."
                             icon={<Hammer />}
                         />
+                    </div>
+                </section>
+
+                <section className="mb-32">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                        <div className="max-w-xl">
+                            <h2 className="text-3xl font-bold text-white tracking-tight">Control en Tiempo Real</h2>
+                            <p className="text-muted font-light mt-2">Visibilidad quirúrgica sobre cada peso invertido en tus proyectos.</p>
+                        </div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-accent/50">Módulo de Auditoría</div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <ChartCard title="Presupuesto vs Realo" subtitle="Desviación Acumulada (MM$)">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={budgetData}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
+                                    <XAxis dataKey="name" stroke="#9CA3AF" fontSize={12} tickLine={false} axisLine={false} />
+                                    <YAxis stroke="#9CA3AF" fontSize={12} tickLine={false} axisLine={false} />
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: '#12121A', border: '1px solid #27272A', borderRadius: '12px' }}
+                                        itemStyle={{ color: '#F3F4F6' }}
+                                    />
+                                    <Line type="step" dataKey="presupuesto" stroke="#9CA3AF" strokeDasharray="5 5" strokeWidth={2} dot={false} />
+                                    <Line type="monotone" dataKey="real" stroke="#10B981" strokeWidth={3} dot={{ r: 4, fill: '#10B981' }} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </ChartCard>
+
+                        <ChartCard title="Avance por Obra" subtitle="Porcentaje de Ejecución">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={progressData}>
+                                    <defs>
+                                        <linearGradient id="colorAvance" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#7C3AED" stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor="#7C3AED" stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
+                                    <XAxis dataKey="name" stroke="#9CA3AF" fontSize={12} tickLine={false} axisLine={false} />
+                                    <YAxis stroke="#9CA3AF" fontSize={12} tickLine={false} axisLine={false} />
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: '#12121A', border: '1px solid #27272A', borderRadius: '12px' }}
+                                    />
+                                    <Area type="monotone" dataKey="avance" stroke="#7C3AED" fillOpacity={1} fill="url(#colorAvance)" strokeWidth={3} />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </ChartCard>
                     </div>
                 </section>
 

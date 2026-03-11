@@ -4,6 +4,30 @@ import { motion } from "framer-motion";
 import { Truck, Activity, Gauge, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Card from "@/components/ui/Card";
+import ChartCard from "@/components/ui/ChartCard";
+import {
+    LineChart, Line, BarChart as ReBarChart, Bar,
+    XAxis, YAxis, CartesianGrid, Tooltip,
+    ResponsiveContainer, Cell, PieChart, Pie, Legend
+} from 'recharts';
+
+const fuelData = [
+    { name: 'Lun', consumo: 45, km: 300 },
+    { name: 'Mar', consumo: 52, km: 350 },
+    { name: 'Mie', consumo: 48, km: 320 },
+    { name: 'Jue', consumo: 61, km: 400 },
+    { name: 'Vie', consumo: 55, km: 380 },
+    { name: 'Sab', consumo: 40, km: 280 },
+    { name: 'Dom', consumo: 35, km: 250 },
+];
+
+const statusData = [
+    { name: 'En Ruta', value: 65 },
+    { name: 'Disponible', value: 20 },
+    { name: 'Mantenimiento', value: 15 },
+];
+
+const COLORS = ['#10B981', '#7C3AED', '#EF4444'];
 
 export default function FleetPage() {
     return (
@@ -79,6 +103,59 @@ export default function FleetPage() {
                             description="Analiza cuándo es el momento óptimo para renovar cada unidad de tu flota."
                             icon={<Truck />}
                         />
+                    </div>
+                </section>
+
+                <section className="mb-32">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                        <div className="max-w-xl">
+                            <h2 className="text-3xl font-bold text-white tracking-tight">Telemetría de Ejemplo</h2>
+                            <p className="text-muted font-light mt-2">Monitoreo activo para reducir el costo por kilómetro y aumentar el tiempo en ruta.</p>
+                        </div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-primary/50">Panel de Control</div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <ChartCard title="Consumo vs Kilómetros" subtitle="Rendimiento Semanal (L/KM)">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={fuelData}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" vertical={false} />
+                                    <XAxis dataKey="name" stroke="#9CA3AF" fontSize={12} tickLine={false} axisLine={false} />
+                                    <YAxis yAxisId="left" stroke="#10B981" fontSize={10} tickLine={false} axisLine={false} />
+                                    <YAxis yAxisId="right" orientation="right" stroke="#7C3AED" fontSize={10} tickLine={false} axisLine={false} />
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: '#12121A', border: '1px solid #27272A', borderRadius: '12px' }}
+                                        itemStyle={{ color: '#F3F4F6' }}
+                                    />
+                                    <Line yAxisId="left" type="monotone" dataKey="consumo" stroke="#10B981" strokeWidth={3} dot={{ r: 4, fill: '#10B981' }} name="Litros" />
+                                    <Line yAxisId="right" type="monotone" dataKey="km" stroke="#7C3AED" strokeWidth={3} dot={{ r: 4, fill: '#7C3AED' }} name="Kilómetros" />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </ChartCard>
+
+                        <ChartCard title="Estado de la Flota" subtitle="Disponibilidad de Activos">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={statusData}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={60}
+                                        outerRadius={80}
+                                        paddingAngle={5}
+                                        dataKey="value"
+                                    >
+                                        {statusData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: '#12121A', border: '1px solid #27272A', borderRadius: '12px' }}
+                                    />
+                                    <Legend verticalAlign="bottom" height={36} />
+                                </PieChart>
+                            </ResponsiveContainer>
+                        </ChartCard>
                     </div>
                 </section>
 
