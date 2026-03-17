@@ -39,7 +39,7 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-4 py-1.5 glass rounded-full mb-10 border-white/5 shadow-sm mx-auto"
           >
             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">BI de Próxima Generación</span>
+            <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">Consultoría Tecnológica Integral</span>
           </motion.div>
 
           <motion.h1
@@ -56,7 +56,7 @@ export default function Home() {
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
             className="text-base md:text-xl text-muted max-w-xl mx-auto mb-16 leading-relaxed font-light"
           >
-            Consultoría BI de alta precisión para PYMES. Eliminamos el ruido de tu información para que el crecimiento sea tu única métrica.
+            Consultoría Tecnológica e Inteligencia de Negocios para PYMES. BI, IA y Automatizaciones diseñadas para que el crecimiento sea tu única métrica.
           </motion.p>
 
           <motion.div
@@ -92,9 +92,14 @@ export default function Home() {
           <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-10 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
             <div className="text-lg font-black tracking-tighter italic">POWER BI</div>
             <div className="text-lg font-black tracking-tighter italic">EXCEL PRO</div>
-            <div className="text-lg font-black tracking-tighter italic">SQL SERVER</div>
+            <div className="text-lg font-black tracking-tighter italic">SQL</div>
             <div className="text-lg font-black tracking-tighter italic">PYTHON BI</div>
-            <div className="text-lg font-black tracking-tighter italic">TABLEAU</div>
+            <div className="text-lg font-black tracking-tighter italic">N8N</div>
+            <div className="text-lg font-black tracking-tighter italic">MACHINE LEARNING</div>
+            <div className="text-lg font-black tracking-tighter italic">OPENROUTER</div>
+            <div className="text-lg font-black tracking-tighter italic">NEXT.JS</div>
+            <div className="text-lg font-black tracking-tighter italic">CSS</div>
+            <div className="text-lg font-black tracking-tighter italic">API REST</div>
           </div>
         </motion.div>
       </section>
@@ -106,18 +111,23 @@ export default function Home() {
           className="glass block-rounded p-12 md:p-20 border-white/5 flex flex-col md:flex-row items-center justify-between gap-12 bg-white/[0.01]"
         >
           <div className="max-w-xl">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tighter leading-none">Tu éxito no es suerte, <br /> son decisiones con <span className="text-primary italic">datos.</span></h2>
-            <p className="text-muted text-lg font-light mb-8">Estrategia, limpieza y visualización. Tres pilares para que tu rentabilidad deje de ser un misterio.</p>
-            <Link href="/servicios" className="inline-flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tighter leading-none">Tu éxito no es suerte, <br /> son decisiones con <span className="text-primary italic">tecnología.</span></h2>
+            <p className="text-muted text-lg font-light mb-8">Análisis de Datos, IA, Automatización y Web. Ecosistemas integrales para que tu rentabilidad deje de ser un misterio.</p>
+            <Link href="/#servicios" className="inline-flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
               Explorar Servicios <ArrowRight size={14} />
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
-            {[{ icon: <Database />, t: "Limpieza" }, { icon: <BarChart3 />, t: "Márgenes" }, { icon: <Zap />, t: "Alertas" }, { icon: <Cpu />, t: "Automatización" }].map((s, i) => (
-              <div key={i} className="glass p-6 rounded-2xl flex flex-col items-center gap-3 text-center border-white/5">
-                <div className="text-primary">{s.icon}</div>
-                <div className="text-[9px] font-black uppercase tracking-widest text-muted">{s.t}</div>
-              </div>
+            {[
+              { icon: <Database />, t: "Data & BI", link: "/servicios/analisis-de-datos" },
+              { icon: <Workflow />, t: "Automatización", link: "/servicios/automatizacion-procesos" },
+              { icon: <Cpu />, t: "IA", link: "/servicios/inteligencia-artificial" },
+              { icon: <Search />, t: "Web & SEO", link: "/servicios/optimizacion-web-seo" }
+            ].map((s, i) => (
+              <Link key={i} href={s.link} className="glass p-6 rounded-2xl flex flex-col items-center gap-3 text-center border-white/5 hover:bg-white/5 transition-colors group cursor-pointer">
+                <div className="text-primary group-hover:scale-110 transition-transform">{s.icon}</div>
+                <div className="text-[9px] font-black uppercase tracking-widest text-muted group-hover:text-white transition-colors">{s.t}</div>
+              </Link>
             ))}
           </div>
         </motion.div>
@@ -230,7 +240,11 @@ export default function Home() {
                 { q: "¿Necesito software específico?", a: "Nos adaptamos a lo que ya usas: Excel, SQL, Google Sheets o ERPs. El valor está en la arquitectura, no solo en la herramienta." },
                 { q: "¿Qué tan seguros están los datos?", a: "Absolutamente protegidos. Trabajamos bajo protocolos de solo lectura y encriptación de extremo a extremo." },
                 { q: "¿Mi negocio es pequeño para BI?", a: "Al contrario. Una PYME con datos claros crece un 40% más rápido que una que decide por intuición." },
-                { q: "¿Cuánto tarda la implementación?", a: "En 15 días tendrás tu primer dashboard operativo entregando datos críticos." }
+                { q: "¿Cuánto tarda la implementación?", a: "En 15 días tendrás tu primer dashboard operativo entregando datos críticos." },
+                { q: "¿Puedo automatizar procesos si no sé programar?", a: "Nosotros nos hacemos cargo de toda la lógica y conexión de APIs. Te entregamos flujos listos funcionando en segundo plano." },
+                { q: "¿Los chatbots de IA suenan robóticos?", a: "No. Entrenamos a los agentes con los documentos, PDF comerciales y el tono conversacional de tu marca para asegurar respuestas precisas y naturales." },
+                { q: "¿Cuánto demora la mejora web y SEO?", a: "La velocidad de carga la mejoramos en días. El posicionamiento orgánico en Google comienza a consolidarse a partir del tercer mes." },
+                { q: "¿Por dónde me recomiendan empezar?", a: "Sugerimos solicitar un diagnóstico gratuito, donde veremos juntos qué duele más: si organizar datos, optimizar ventas (Web), ganar tiempo (Automatizar) o atender mejor (IA)." }
               ].map((faq, idx) => (
                 <details key={idx} className="group cursor-pointer border-b border-white/5 pb-6">
                   <summary className="font-bold flex justify-between items-center list-none text-white/80 group-hover:text-white transition-colors">

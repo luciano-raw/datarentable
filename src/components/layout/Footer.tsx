@@ -27,7 +27,7 @@ export default function Footer() {
                         <h4 className="text-xs font-black uppercase tracking-[0.2em] text-white">Compañía</h4>
                         <div className="flex flex-col gap-3 text-sm text-text-muted">
                             <Link href="/sobre" className="hover:text-primary transition-colors">Sobre nosotros</Link>
-                            <Link href="/servicios" className="hover:text-primary transition-colors">Servicios</Link>
+                            <Link href="/#servicios" className="hover:text-primary transition-colors">Servicios</Link>
                             <Link href="/casos" className="hover:text-primary transition-colors">Casos de éxito</Link>
                         </div>
                     </div>
